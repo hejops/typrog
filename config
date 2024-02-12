@@ -1,0 +1,6 @@
+[languages]
+# the result of each command should yield a list of filenames matching a given filetype
+go = fd '.*\.go$' ~/go
+lua = fd '.*\.lua$' ~/.local/share/nvim/lazy
+rs = fd '.*\.rs$' ~/.cargo
+sh = file ~/scripts/* | grep Bourne | cut -d: -f1
