@@ -1,6 +1,11 @@
 [languages]
 # the result of each command should yield a list of filenames matching a given filetype
-go = fd '.*\.go$' ~/go
-lua = fd '.*\.lua$' ~/.local/share/nvim/lazy
-rs = fd '.*\.rs$' ~/.cargo
-sh = file ~/scripts/* | grep Bourne | cut -d: -f1
+c  = rg --files -t c  /usr/lib
+go = rg --files -t go /usr/lib/go
+js = rg --files -t js /usr/lib
+py = rg --files -t py /usr/lib
+sh = rg --files -t sh /usr/lib
+
+# these can be uncommented if the paths exist on your system
+# lua = rg --files -t lua ~/.local/share/nvim/lazy
+# rs = rg --files -t rust ~/.cargo
