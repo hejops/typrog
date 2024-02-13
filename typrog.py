@@ -18,10 +18,15 @@ def main(
     *words: str,
     max_words: int = 25,
 ):
-    start = 0
-    lines = wrap(" ".join(words[:max_words]), 80)
+    start_time = 0
+
+    total_chars = 0
+    errors = 0
+
     lines_done = []
     curr_line_typed = ""
+
+    lines = wrap(" ".join(words[:max_words]), 80)
 
     for curr_line in lines:
         while curr_line_typed != curr_line:
@@ -40,8 +45,11 @@ def main(
             if char == curr_line[len(curr_line_typed)]:
                 curr_line_typed += char
                 if len(curr_line_typed) == 1 and not lines_done:
-                    start = time.time()
+                    start_time = time.time()
+            else:
+                errors += 1
 
+        total_chars += len(curr_line)
         lines_done.append(curr_line)
         curr_line_typed = ""
 
@@ -50,8 +58,10 @@ def main(
     print("\n".join("  " + l for l in lines_done))
 
     end = time.time()
-    wpm = max_words // ((end - start) / 60)
-    print(wpm, "wpm")
+    wpm = int(max_words / ((end - start_time) / 60))
+
+    success_rate = total_chars * 100 // (total_chars + errors)
+    print(f"{wpm} wpm, {success_rate} %")
 
 
 config = configparser.ConfigParser()
