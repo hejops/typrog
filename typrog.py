@@ -55,7 +55,7 @@ def main(
 
 
 config = configparser.ConfigParser()
-config.read("config")
+config.read(os.path.dirname(__file__) + "/config")
 
 LANGS = dict(config["languages"])
 lang = choice(list(LANGS))
